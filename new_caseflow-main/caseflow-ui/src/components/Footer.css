@@ -1,0 +1,26 @@
+/* Dark-themed footer — keeps only brand colors (navy/gold tokens),
+   Playfair Display logo, and the custom gold hover for links. All
+   layout/spacing is handled by Bootstrap utilities in the JSX. */
+
+/* ===== Surface & brand colors ===== */
+.cf-footer {
+  background: var(--cf-navy-950);
+  color: rgba(255, 255, 255, 0.6);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ===== Brand logo typography ===== */
+.cf-footer__logo-icon { filter: grayscale(1) brightness(2); }
+.cf-footer__logo-text { font-family: var(--font-display); color: var(--cf-white); }
+.cf-footer__logo-accent { color: var(--cf-gold-400); }
+
+/* ===== Link color + branded gold hover ===== */
+.cf-footer__link {
+  color: rgba(255, 255, 255, 0.6);
+  transition: color var(--duration-fast);
+}
+a.cf-footer__link:hover { color: var(--cf-gold-400); }
+
+/* ===== Bottom divider bar ===== */
+.cf-footer__bottom { border-top: 1px solid rgba(255, 255, 255, 0.08); }
+.cf-footer__built { color: rgba(255, 255, 255, 0.35); }

@@ -1,0 +1,15 @@
+# Build artifacts
+target/
+*.class
+
+# IDE files
+*.iml
+.idea/
+
+# Configuration files
+*.yml
+*.yaml
+
+# OS files
+.DS_Store
+

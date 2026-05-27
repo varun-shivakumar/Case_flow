@@ -1,0 +1,621 @@
+/* ============================================================
+   CaseFlow — full dark theme
+   Activated by [data-theme="dark"] on <html>.
+   Designed to fully override Bootstrap + custom component
+   light styling so the entire app — cards, tables, forms,
+   modals, badges, alerts — picks up a cohesive dark palette.
+   ============================================================ */
+
+[data-theme="dark"] {
+  /* --- semantic palette -------------------------------------------------- */
+  --cf-bg:           #0b1020;   /* page background */
+  --cf-surface:      #131a31;   /* card / panel surface */
+  --cf-surface-2:    #1a2240;   /* nested surface (table head, hover) */
+  --cf-surface-3:    #232c50;   /* subtle highlight */
+  --cf-border:       #2a3458;
+  --cf-border-soft:  rgba(255, 255, 255, 0.08);
+  --cf-text:         #e5e9f5;
+  --cf-text-muted:   #9aa3c4;
+  --cf-text-dim:     #6b7494;
+  --cf-accent:       #c9a84c;   /* primary brand gold */
+  --cf-accent-hov:   #d4b865;
+  --cf-link:         #7aa6ff;
+  --cf-success:      #22c55e;
+  --cf-warning:      #f59e0b;
+  --cf-danger:       #f15e64;
+  --cf-info:         #38bdf8;
+
+  /* --- Bootstrap CSS custom-property overrides --------------------------- */
+  --bs-body-bg:           var(--cf-bg);
+  --bs-body-color:        var(--cf-text);
+  --bs-secondary-color:   var(--cf-text-muted);
+  --bs-tertiary-color:    var(--cf-text-dim);
+  --bs-emphasis-color:    var(--cf-text);
+  --bs-border-color:      var(--cf-border);
+  --bs-border-color-translucent: var(--cf-border-soft);
+  --bs-secondary-bg:      var(--cf-surface-2);
+  --bs-tertiary-bg:       var(--cf-surface-3);
+  --bs-link-color:        var(--cf-link);
+  --bs-link-hover-color:  #a3c0ff;
+  --bs-heading-color:     var(--cf-text);
+  color-scheme: dark;
+}
+
+/* --- base elements ---------------------------------------------------------- */
+[data-theme="dark"] body {
+  background: var(--cf-bg) !important;
+  color: var(--cf-text);
+}
+
+[data-theme="dark"] a { color: var(--cf-link); }
+[data-theme="dark"] a:hover { color: #a3c0ff; }
+
+[data-theme="dark"] hr { border-color: var(--cf-border); }
+
+[data-theme="dark"] code,
+[data-theme="dark"] pre {
+  background: var(--cf-surface-2);
+  color: #e5e9f5;
+  border: 1px solid var(--cf-border);
+  border-radius: 6px;
+}
+
+/* --- cards ------------------------------------------------------------------ */
+[data-theme="dark"] .card,
+[data-theme="dark"] .modal-content,
+[data-theme="dark"] .popover,
+[data-theme="dark"] .dropdown-menu {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text);
+  border: 1px solid var(--cf-border) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
+}
+
+[data-theme="dark"] .card-header,
+[data-theme="dark"] .card-footer {
+  background: var(--cf-surface-2) !important;
+  border-color: var(--cf-border) !important;
+  color: var(--cf-text);
+}
+
+[data-theme="dark"] .card-body { color: var(--cf-text); }
+
+/* --- tables ----------------------------------------------------------------- */
+[data-theme="dark"] .table,
+[data-theme="dark"] .table > :not(caption) > * > * {
+  --bs-table-bg:          transparent;
+  --bs-table-color:       var(--cf-text);
+  --bs-table-border-color: var(--cf-border);
+  --bs-table-striped-bg:  rgba(255, 255, 255, 0.03);
+  --bs-table-hover-bg:    rgba(122, 166, 255, 0.07);
+  --bs-table-hover-color: var(--cf-text);
+  color: var(--cf-text);
+  border-color: var(--cf-border) !important;
+}
+
+[data-theme="dark"] .table thead,
+[data-theme="dark"] .table-light,
+[data-theme="dark"] .table-light > :not(caption) > * > *,
+[data-theme="dark"] .table > thead {
+  background: var(--cf-surface-2) !important;
+  color: var(--cf-text) !important;
+  --bs-table-bg: var(--cf-surface-2);
+  --bs-table-color: var(--cf-text);
+  border-color: var(--cf-border) !important;
+}
+
+[data-theme="dark"] .table-active,
+[data-theme="dark"] .table-active > th,
+[data-theme="dark"] .table-active > td {
+  --bs-table-bg-state: rgba(122, 166, 255, 0.12);
+  background: rgba(122, 166, 255, 0.12) !important;
+  color: var(--cf-text) !important;
+}
+
+[data-theme="dark"] .table-danger,
+[data-theme="dark"] .table-danger > th,
+[data-theme="dark"] .table-danger > td {
+  background: rgba(241, 94, 100, 0.14) !important;
+  color: #fbb4b8 !important;
+}
+
+[data-theme="dark"] .table-warning,
+[data-theme="dark"] .table-warning > th,
+[data-theme="dark"] .table-warning > td {
+  background: rgba(245, 158, 11, 0.13) !important;
+  color: #ffd58a !important;
+}
+
+[data-theme="dark"] .table-success,
+[data-theme="dark"] .table-success > th,
+[data-theme="dark"] .table-success > td {
+  background: rgba(34, 197, 94, 0.14) !important;
+  color: #9ee9b9 !important;
+}
+
+/* --- forms ------------------------------------------------------------------ */
+[data-theme="dark"] .form-control,
+[data-theme="dark"] .form-select,
+[data-theme="dark"] .input-group-text {
+  background: var(--cf-surface-2) !important;
+  color: var(--cf-text) !important;
+  border-color: var(--cf-border) !important;
+}
+
+[data-theme="dark"] .form-control::placeholder { color: var(--cf-text-dim); }
+
+[data-theme="dark"] .form-control:focus,
+[data-theme="dark"] .form-select:focus {
+  background: var(--cf-surface-2) !important;
+  color: var(--cf-text) !important;
+  border-color: var(--cf-accent) !important;
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.18) !important;
+}
+
+[data-theme="dark"] .form-control[readonly],
+[data-theme="dark"] .form-control:disabled,
+[data-theme="dark"] .form-select:disabled {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text-muted) !important;
+}
+
+[data-theme="dark"] .form-label,
+[data-theme="dark"] label { color: var(--cf-text); }
+
+[data-theme="dark"] .form-text { color: var(--cf-text-muted) !important; }
+
+[data-theme="dark"] .form-check-input {
+  background-color: var(--cf-surface-2);
+  border-color: var(--cf-border);
+}
+[data-theme="dark"] .form-check-input:checked {
+  background-color: var(--cf-accent);
+  border-color: var(--cf-accent);
+}
+
+/* --- buttons ---------------------------------------------------------------- */
+[data-theme="dark"] .btn-light,
+[data-theme="dark"] .btn-outline-secondary {
+  background: var(--cf-surface-2);
+  color: var(--cf-text);
+  border-color: var(--cf-border);
+}
+[data-theme="dark"] .btn-light:hover,
+[data-theme="dark"] .btn-outline-secondary:hover {
+  background: var(--cf-surface-3);
+  color: var(--cf-text);
+  border-color: var(--cf-border);
+}
+
+[data-theme="dark"] .btn-dark {
+  background: var(--cf-accent);
+  border-color: var(--cf-accent);
+  color: #1a1206;
+}
+[data-theme="dark"] .btn-dark:hover {
+  background: var(--cf-accent-hov);
+  border-color: var(--cf-accent-hov);
+  color: #1a1206;
+}
+
+[data-theme="dark"] .btn-outline-primary { color: var(--cf-link); border-color: var(--cf-link); }
+[data-theme="dark"] .btn-outline-primary:hover { background: var(--cf-link); color: #06122a; }
+
+[data-theme="dark"] .btn-outline-danger { color: var(--cf-danger); border-color: var(--cf-danger); }
+[data-theme="dark"] .btn-outline-danger:hover { background: var(--cf-danger); color: #fff; }
+
+[data-theme="dark"] .btn-outline-success { color: var(--cf-success); border-color: var(--cf-success); }
+[data-theme="dark"] .btn-outline-success:hover { background: var(--cf-success); color: #052e13; }
+
+[data-theme="dark"] .btn-link { color: var(--cf-link); }
+[data-theme="dark"] .btn-link:hover { color: #a3c0ff; }
+
+/* --- badges (re-tone Bootstrap's) ------------------------------------------ */
+[data-theme="dark"] .text-bg-light {
+  background: var(--cf-surface-2) !important;
+  color: var(--cf-text) !important;
+  border: 1px solid var(--cf-border);
+}
+[data-theme="dark"] .text-bg-secondary {
+  background: var(--cf-surface-3) !important;
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] .text-bg-info {
+  background: rgba(56, 189, 248, 0.18) !important;
+  color: #b6e9ff !important;
+}
+[data-theme="dark"] .text-bg-success {
+  background: rgba(34, 197, 94, 0.18) !important;
+  color: #9ee9b9 !important;
+}
+[data-theme="dark"] .text-bg-warning {
+  background: rgba(245, 158, 11, 0.18) !important;
+  color: #ffd58a !important;
+}
+[data-theme="dark"] .text-bg-danger {
+  background: rgba(241, 94, 100, 0.18) !important;
+  color: #fbb4b8 !important;
+}
+[data-theme="dark"] .text-bg-primary {
+  background: rgba(122, 166, 255, 0.18) !important;
+  color: #cdddff !important;
+}
+
+[data-theme="dark"] .bg-light  { background: var(--cf-surface-2) !important; color: var(--cf-text); }
+[data-theme="dark"] .bg-white  { background: var(--cf-surface)   !important; color: var(--cf-text); }
+[data-theme="dark"] .bg-body   { background: var(--cf-bg)        !important; }
+
+/* --- alerts ----------------------------------------------------------------- */
+[data-theme="dark"] .alert { border-width: 1px; }
+[data-theme="dark"] .alert-primary {
+  background: rgba(122, 166, 255, 0.10);
+  color: #cdddff;
+  border-color: rgba(122, 166, 255, 0.35);
+}
+[data-theme="dark"] .alert-success {
+  background: rgba(34, 197, 94, 0.10);
+  color: #9ee9b9;
+  border-color: rgba(34, 197, 94, 0.35);
+}
+[data-theme="dark"] .alert-warning {
+  background: rgba(245, 158, 11, 0.10);
+  color: #ffd58a;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+[data-theme="dark"] .alert-danger {
+  background: rgba(241, 94, 100, 0.10);
+  color: #fbb4b8;
+  border-color: rgba(241, 94, 100, 0.35);
+}
+[data-theme="dark"] .alert-info {
+  background: rgba(56, 189, 248, 0.10);
+  color: #b6e9ff;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+[data-theme="dark"] .alert-secondary {
+  background: var(--cf-surface-2);
+  color: var(--cf-text-muted);
+  border-color: var(--cf-border);
+}
+
+/* --- progress bars / dividers ---------------------------------------------- */
+[data-theme="dark"] .progress {
+  background-color: var(--cf-surface-2) !important;
+}
+[data-theme="dark"] .progress-bar {
+  /* leave Bootstrap colour but make sure the track shows through */
+}
+[data-theme="dark"] .vr {
+  background-color: var(--cf-border);
+  opacity: 1;
+}
+[data-theme="dark"] .border,
+[data-theme="dark"] .border-top,
+[data-theme="dark"] .border-bottom,
+[data-theme="dark"] .border-start,
+[data-theme="dark"] .border-end { border-color: var(--cf-border) !important; }
+
+/* --- text utilities -------------------------------------------------------- */
+[data-theme="dark"] .text-muted   { color: var(--cf-text-muted) !important; }
+[data-theme="dark"] .text-secondary { color: var(--cf-text-muted) !important; }
+[data-theme="dark"] .text-dark    { color: var(--cf-text) !important; }
+[data-theme="dark"] .text-body    { color: var(--cf-text) !important; }
+[data-theme="dark"] .text-success { color: var(--cf-success) !important; }
+[data-theme="dark"] .text-warning { color: var(--cf-warning) !important; }
+[data-theme="dark"] .text-danger  { color: var(--cf-danger)  !important; }
+[data-theme="dark"] .text-info    { color: var(--cf-info)    !important; }
+[data-theme="dark"] .text-primary { color: var(--cf-link)    !important; }
+
+/* --- modals / offcanvas ----------------------------------------------------- */
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer { border-color: var(--cf-border); }
+[data-theme="dark"] .modal-content { background: var(--cf-surface) !important; color: var(--cf-text); }
+[data-theme="dark"] .btn-close {
+  filter: invert(1) brightness(1.4) saturate(0.4);
+}
+
+[data-theme="dark"] .offcanvas {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text);
+}
+
+/* --- dropdowns -------------------------------------------------------------- */
+[data-theme="dark"] .dropdown-menu {
+  background: var(--cf-surface) !important;
+  border: 1px solid var(--cf-border) !important;
+}
+[data-theme="dark"] .dropdown-item {
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] .dropdown-item:hover,
+[data-theme="dark"] .dropdown-item:focus {
+  background: var(--cf-surface-2) !important;
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] .dropdown-divider { border-color: var(--cf-border); }
+
+/* --- list-group ------------------------------------------------------------- */
+[data-theme="dark"] .list-group-item {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text);
+  border-color: var(--cf-border) !important;
+}
+[data-theme="dark"] .list-group-item.active {
+  background: var(--cf-surface-3) !important;
+  color: var(--cf-text);
+  border-color: var(--cf-border) !important;
+}
+
+/* --- nav / tabs ------------------------------------------------------------- */
+[data-theme="dark"] .nav-tabs { border-color: var(--cf-border); }
+[data-theme="dark"] .nav-tabs .nav-link {
+  color: var(--cf-text-muted);
+  border-color: transparent;
+}
+[data-theme="dark"] .nav-tabs .nav-link.active {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text) !important;
+  border-color: var(--cf-border) var(--cf-border) var(--cf-surface) !important;
+}
+
+/* --- inline soft-coloured panels used by the app --------------------------- */
+[data-theme="dark"] [style*="background: #f8f9fa"],
+[data-theme="dark"] [style*="background:#f8f9fa"],
+[data-theme="dark"] [style*="background: #f8f9fc"],
+[data-theme="dark"] [style*="background:#f8f9fc"],
+[data-theme="dark"] [style*="background: #fafafa"],
+[data-theme="dark"] [style*="background:#fafafa"],
+[data-theme="dark"] [style*="background: #fafcff"],
+[data-theme="dark"] [style*="background:#fafcff"],
+[data-theme="dark"] [style*="background: #f1f3f5"],
+[data-theme="dark"] [style*="background:#f1f3f5"] {
+  background: var(--cf-surface-2) !important;
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] [style*="background: #f0fdf4"],
+[data-theme="dark"] [style*="background:#f0fdf4"] {
+  background: rgba(34, 197, 94, 0.10) !important;
+}
+[data-theme="dark"] [style*="background: #fef2f2"],
+[data-theme="dark"] [style*="background:#fef2f2"] {
+  background: rgba(241, 94, 100, 0.12) !important;
+}
+[data-theme="dark"] [style*="background: #fff7ed"],
+[data-theme="dark"] [style*="background:#fff7ed"],
+[data-theme="dark"] [style*="background: #fffbeb"],
+[data-theme="dark"] [style*="background:#fffbeb"] {
+  background: rgba(245, 158, 11, 0.12) !important;
+}
+[data-theme="dark"] [style*="background: #eff6ff"],
+[data-theme="dark"] [style*="background:#eff6ff"] {
+  background: rgba(122, 166, 255, 0.12) !important;
+}
+[data-theme="dark"] [style*="background: #f5f0ff"],
+[data-theme="dark"] [style*="background:#f5f0ff"],
+[data-theme="dark"] [style*="background: #faf5ff"],
+[data-theme="dark"] [style*="background:#faf5ff"] {
+  background: rgba(160, 122, 255, 0.12) !important;
+}
+[data-theme="dark"] [style*="background: #f0fdff"],
+[data-theme="dark"] [style*="background:#f0fdff"] {
+  background: rgba(56, 189, 248, 0.12) !important;
+}
+[data-theme="dark"] [style*="background: #fff5f5"],
+[data-theme="dark"] [style*="background:#fff5f5"],
+[data-theme="dark"] [style*="background: #fff1f2"],
+[data-theme="dark"] [style*="background:#fff1f2"] {
+  background: rgba(241, 94, 100, 0.10) !important;
+}
+
+/* --- selection / focus ring ------------------------------------------------- */
+[data-theme="dark"] ::selection {
+  background: rgba(201, 168, 76, 0.45);
+  color: #fff;
+}
+
+/* --- custom page-title styling ---------------------------------------------- */
+[data-theme="dark"] .page-title { color: var(--cf-text); }
+
+/* --- scrollbar (Chromium) --------------------------------------------------- */
+[data-theme="dark"] ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: var(--cf-bg);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: var(--cf-surface-3);
+  border-radius: 999px;
+  border: 2px solid var(--cf-bg);
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: var(--cf-border);
+}
+
+/* --- soft "rounded-3" containers used throughout --------------------------- */
+[data-theme="dark"] .rounded-3 { background-color: inherit; }
+
+/* --- fix images / icons that assume light bg ------------------------------- */
+[data-theme="dark"] img.bg-light,
+[data-theme="dark"] svg.bg-light { background: var(--cf-surface-2) !important; }
+
+/* --- spinner contrast ------------------------------------------------------- */
+[data-theme="dark"] .spinner-border { color: var(--cf-accent); }
+
+/* --- focus ring on keyboard navigation ------------------------------------- */
+[data-theme="dark"] :focus-visible {
+  outline: 2px solid var(--cf-accent);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.18);
+}
+
+/* ============================================================
+   PATCH BUNDLE — items that resisted the first pass
+   ============================================================ */
+
+/* --- root body / html — beats index.css's `body { background: white; }` --- */
+[data-theme="dark"] html,
+[data-theme="dark"] body,
+[data-theme="dark"] #root {
+  background: var(--cf-bg) !important;
+  color: var(--cf-text) !important;
+}
+
+/* --- AppLayout had a few hardcoded #ffffff panels --------------------------- */
+[data-theme="dark"] .app-topbar__lang-select,
+[data-theme="dark"] .app-topbar__lang-select option,
+[data-theme="dark"] .app-shell,
+[data-theme="dark"] .app-main,
+[data-theme="dark"] .app-content {
+  background: var(--cf-bg) !important;
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] .app-topbar__lang-select option {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text) !important;
+}
+
+/* --- Auth pages (Login / Register / Forgot / Reset) ------------------------ */
+/* The right "form panel" was on the body's white background and had inline
+   color:#0f1629 headings that became invisible. Force a dark surface and
+   re-tint the typography. The left branding panel already looks fine. */
+[data-theme="dark"] .auth-page,
+[data-theme="dark"] .auth-form-panel {
+  background: var(--cf-bg) !important;
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] .auth-form-shell h1,
+[data-theme="dark"] .auth-form-shell h2,
+[data-theme="dark"] .auth-form-shell h3,
+[data-theme="dark"] .auth-form-shell label {
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] .auth-form-shell .text-dark { color: var(--cf-text) !important; }
+[data-theme="dark"] .auth-form-shell .text-muted { color: var(--cf-text-muted) !important; }
+[data-theme="dark"] .auth-form-shell .input-group-text,
+[data-theme="dark"] .auth-form-shell .input-group-text.bg-light {
+  background: var(--cf-surface-2) !important;
+  border-color: var(--cf-border) !important;
+  color: var(--cf-text-muted) !important;
+}
+[data-theme="dark"] .auth-form-shell .form-control,
+[data-theme="dark"] .auth-form-shell .form-control.border-start-0,
+[data-theme="dark"] .auth-form-shell .form-control.border-end-0 {
+  background: var(--cf-surface-2) !important;
+  color: var(--cf-text) !important;
+  border-color: var(--cf-border) !important;
+}
+/* Sign-in submit button: brand-gold instead of the inline near-black */
+[data-theme="dark"] .auth-submit-btn {
+  background: var(--cf-accent) !important;
+  color: #1a1206 !important;
+  border-color: var(--cf-accent) !important;
+}
+[data-theme="dark"] .auth-submit-btn:hover {
+  background: var(--cf-accent-hov) !important;
+  border-color: var(--cf-accent-hov) !important;
+}
+/* Mobile-only logo headline */
+[data-theme="dark"] .auth-form-shell .d-lg-none [style*="color: #0f1629"] {
+  color: var(--cf-text) !important;
+}
+
+/* --- Inline-style colour overrides (defeating colour:'#0f1629' in JSX) ----- */
+[data-theme="dark"] [style*="color: #0f1629"],
+[data-theme="dark"] [style*="color:#0f1629"],
+[data-theme="dark"] [style*="color: #0a0e1a"],
+[data-theme="dark"] [style*="color:#0a0e1a"],
+[data-theme="dark"] [style*="color: #1a2340"],
+[data-theme="dark"] [style*="color:#1a2340"] {
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] [style*="color: #6c757d"],
+[data-theme="dark"] [style*="color:#6c757d"],
+[data-theme="dark"] [style*="color: #adb5bd"],
+[data-theme="dark"] [style*="color:#adb5bd"] {
+  color: var(--cf-text-muted) !important;
+}
+
+/* --- Inline white backgrounds (defeating background:'#fff' in JSX) --------- */
+[data-theme="dark"] [style*="background: #fff"],
+[data-theme="dark"] [style*="background:#fff"],
+[data-theme="dark"] [style*="background: white"],
+[data-theme="dark"] [style*="background:white"],
+[data-theme="dark"] [style*="background: #ffffff"],
+[data-theme="dark"] [style*="background:#ffffff"],
+[data-theme="dark"] [style*="background-color: #fff"],
+[data-theme="dark"] [style*="background-color:#fff"],
+[data-theme="dark"] [style*="background-color: white"],
+[data-theme="dark"] [style*="background-color:white"] {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text) !important;
+}
+
+/* --- Appeals page (Appeals.css uses lots of #fff in custom classes) -------- */
+[data-theme="dark"] .appeal-row-card,
+[data-theme="dark"] .appeal-card,
+[data-theme="dark"] .appeal-section-card,
+[data-theme="dark"] .appeal-stat-card,
+[data-theme="dark"] .appeal-doc-card,
+[data-theme="dark"] .appeal-decide-banner,
+[data-theme="dark"] .appeal-dropzone,
+[data-theme="dark"] .appeal-timeline,
+[data-theme="dark"] .appeal-timeline__entry {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text) !important;
+  border-color: var(--cf-border) !important;
+}
+[data-theme="dark"] .appeal-dropzone--active {
+  background: var(--cf-surface-2) !important;
+  border-color: var(--cf-accent) !important;
+}
+[data-theme="dark"] .appeal-timeline__dot {
+  background: var(--cf-surface-2) !important;
+}
+[data-theme="dark"] .appeal-outcome-chip {
+  background: var(--cf-surface-2) !important;
+  color: var(--cf-text) !important;
+  border-color: var(--cf-border) !important;
+}
+
+/* --- Schedule-hearing page form card (uses inline cardStyle) --------------- */
+[data-theme="dark"] [style*="boxShadow: 0 2px 12px rgba(10,14,26,0.06)"],
+[data-theme="dark"] [style*="boxShadow:0 2px 12px rgba(10,14,26,0.06)"] {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text) !important;
+  border: 1px solid var(--cf-border) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
+}
+
+/* --- Public marketing pages (Home / About / HowItWorks / Contact) --------- */
+[data-theme="dark"] .home-page,
+[data-theme="dark"] .marketing-page,
+[data-theme="dark"] .public-page,
+[data-theme="dark"] section[style*="background"] {
+  color: var(--cf-text);
+}
+
+/* --- Generic fallback: any container styled with light Bootstrap utilities */
+[data-theme="dark"] .bg-body-tertiary { background: var(--cf-surface-2) !important; color: var(--cf-text); }
+[data-theme="dark"] .bg-body-secondary { background: var(--cf-surface-2) !important; color: var(--cf-text); }
+
+/* --- Make black-on-white footer text legible ------------------------------- */
+[data-theme="dark"] footer,
+[data-theme="dark"] .app-footer {
+  background: var(--cf-surface) !important;
+  color: var(--cf-text-muted) !important;
+  border-top: 1px solid var(--cf-border) !important;
+}
+
+/* --- Ensure any "btn-primary" inline styled with dark blue stays readable -- */
+[data-theme="dark"] .btn-primary {
+  background: var(--cf-accent);
+  border-color: var(--cf-accent);
+  color: #1a1206;
+}
+[data-theme="dark"] .btn-primary:hover {
+  background: var(--cf-accent-hov);
+  border-color: var(--cf-accent-hov);
+  color: #1a1206;
+}

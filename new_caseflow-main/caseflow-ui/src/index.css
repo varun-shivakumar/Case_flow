@@ -1,0 +1,601 @@
+/* ===== Pastel design system ===== */
+/* Soft warm-cream base with pastel accents. Switches via [data-theme]. */
+
+:root,
+[data-theme="light"] {
+  --cf-bg: #fbf7f2; /* warm cream */
+  --cf-surface: #ffffff;
+  --cf-surface-alt: #f5efe6; /* soft cream */
+  --cf-border: #ebe4d8;
+  --cf-border-soft: #f3ece1;
+  --cf-text: #2d2a26;
+  --cf-text-soft: #4d4943;
+  --cf-muted: #8b827a;
+  --cf-accent: #2d2a26;
+  --cf-accent-soft: #f5efe6;
+
+  /* Pastel accent palette — used on icons, chips, decorative blocks */
+  --cf-pastel-blue: #dbeafe;
+  --cf-pastel-purple: #ede9fe;
+  --cf-pastel-green: #d1fae5;
+  --cf-pastel-pink: #fce7f3;
+  --cf-pastel-peach: #fed7aa;
+  --cf-pastel-mint: #ccfbf1;
+  --cf-pastel-rose: #ffe4e6;
+  --cf-pastel-lemon: #fef3c7;
+
+  /* Pastel text-tones (sit on top of the pastel bg) */
+  --cf-pastel-blue-fg: #1e40af;
+  --cf-pastel-purple-fg: #5b21b6;
+  --cf-pastel-green-fg: #047857;
+  --cf-pastel-pink-fg: #9d174d;
+  --cf-pastel-peach-fg: #9a3412;
+  --cf-pastel-mint-fg: #115e59;
+  --cf-pastel-rose-fg: #9f1239;
+  --cf-pastel-lemon-fg: #854d0e;
+
+  --cf-shadow-xs: 0 1px 2px rgba(45, 42, 38, 0.04);
+  --cf-shadow-sm:
+    0 1px 3px rgba(45, 42, 38, 0.06), 0 1px 2px rgba(45, 42, 38, 0.04);
+  --cf-shadow-md:
+    0 6px 16px rgba(45, 42, 38, 0.08), 0 2px 4px rgba(45, 42, 38, 0.04);
+  --cf-shadow-lg:
+    0 16px 32px rgba(45, 42, 38, 0.12), 0 4px 10px rgba(45, 42, 38, 0.05);
+}
+
+/* Hide the browser's built-in password reveal icon (Edge/Chrome) so it doesn't
+   double up with our custom show/hide toggle button. */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear { display: none; }
+input[type="password"]::-webkit-credentials-auto-fill-button { visibility: hidden; }
+
+[data-theme="dark"] {
+  --cf-bg: #1a1815;
+  --cf-surface: #232019;
+  --cf-surface-alt: #2d2924;
+  --cf-border: #33302a;
+  --cf-border-soft: #2a2722;
+  --cf-text: #f5efe6;
+  --cf-text-soft: #e5ddd0;
+  --cf-muted: #a8a094;
+  --cf-accent: #f5efe6;
+  --cf-accent-soft: #2d2924;
+
+  --cf-pastel-blue: #1e3a5f;
+  --cf-pastel-purple: #312455;
+  --cf-pastel-green: #14422f;
+  --cf-pastel-pink: #4a1f3a;
+  --cf-pastel-peach: #4a2818;
+  --cf-pastel-mint: #134e4a;
+  --cf-pastel-rose: #4a1d2c;
+  --cf-pastel-lemon: #453714;
+
+  --cf-pastel-blue-fg: #bfdbfe;
+  --cf-pastel-purple-fg: #ddd6fe;
+  --cf-pastel-green-fg: #a7f3d0;
+  --cf-pastel-pink-fg: #fbcfe8;
+  --cf-pastel-peach-fg: #fed7aa;
+  --cf-pastel-mint-fg: #99f6e4;
+  --cf-pastel-rose-fg: #fecdd3;
+  --cf-pastel-lemon-fg: #fde68a;
+
+  --cf-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --cf-shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4), 0 1px 2px rgba(0, 0, 0, 0.25);
+  --cf-shadow-md: 0 6px 16px rgba(0, 0, 0, 0.45), 0 2px 4px rgba(0, 0, 0, 0.25);
+  --cf-shadow-lg:
+    0 16px 32px rgba(0, 0, 0, 0.55), 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+html,
+body {
+  background: var(--cf-bg);
+  color: var(--cf-text);
+  font-family:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  color: var(--cf-text);
+}
+
+.page-title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cf-muted {
+  color: var(--cf-muted);
+}
+
+/* ===== Card ===== */
+.cf-card {
+  background: var(--cf-surface);
+  border: 1px solid var(--cf-border);
+  border-radius: 12px;
+  box-shadow: var(--cf-shadow-xs);
+  transition:
+    box-shadow 220ms ease,
+    transform 220ms ease,
+    border-color 220ms ease;
+}
+.cf-card-hover {
+  cursor: default;
+}
+.cf-card-hover:hover {
+  box-shadow: var(--cf-shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--cf-border-soft);
+}
+
+/* Bootstrap card alignment so the rest of the app picks up tokens too */
+.card {
+  background-color: var(--cf-surface);
+  border-color: var(--cf-border);
+}
+
+/* ===== Table cell overflow — prevent content from bleeding into adjacent cells ===== */
+.table td {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+/* Give status/action cells a stable minimum width and prevent them shrinking */
+.table td:last-child,
+.table td:has(.badge),
+.table td:has(.btn) {
+  white-space: nowrap;
+  word-break: normal;
+  overflow-wrap: normal;
+  width: 1%;
+}
+
+/* ===== Buttons ===== */
+.btn-dark {
+  --bs-btn-bg: var(--cf-accent);
+  --bs-btn-border-color: var(--cf-accent);
+  --bs-btn-color: var(--cf-surface);
+  --bs-btn-hover-bg: var(--cf-text-soft);
+  --bs-btn-hover-border-color: var(--cf-text-soft);
+  --bs-btn-hover-color: var(--cf-surface);
+  --bs-btn-active-bg: var(--cf-text-soft);
+  --bs-btn-active-border-color: var(--cf-text-soft);
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+.btn-dark:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--cf-shadow-sm);
+}
+
+.btn-outline-dark {
+  --bs-btn-color: var(--cf-text);
+  --bs-btn-border-color: var(--cf-border);
+  --bs-btn-hover-bg: var(--cf-surface-alt);
+  --bs-btn-hover-border-color: var(--cf-text);
+  --bs-btn-hover-color: var(--cf-text);
+  transition:
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+.btn-outline-dark:hover {
+  transform: translateY(-1px);
+}
+
+.btn-outline-secondary {
+  --bs-btn-color: var(--cf-text-soft);
+  --bs-btn-border-color: var(--cf-border);
+  --bs-btn-hover-bg: var(--cf-surface-alt);
+  --bs-btn-hover-color: var(--cf-text);
+  --bs-btn-hover-border-color: var(--cf-border);
+}
+
+/* ===== App shell layout ===== */
+.cf-shell {
+  display: flex;
+  min-height: 70vh;
+  background: var(--cf-bg);
+}
+.cf-sidebar {
+  width: 220px;
+  background: var(--cf-surface);
+  border-right: 1px solid var(--cf-border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+.cf-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.cf-topbar {
+  background: var(--cf-surface);
+  border-bottom: 1px solid var(--cf-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: var(--cf-shadow-xs);
+}
+.cf-content {
+  padding: 1.25rem 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cf-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  color: var(--cf-muted);
+  font-size: 14px;
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    transform 150ms ease;
+}
+.cf-nav-link:hover {
+  background: var(--cf-surface-alt);
+  color: var(--cf-text);
+  transform: translateX(2px);
+}
+.cf-nav-link.active {
+  background: var(--cf-accent);
+  color: var(--cf-surface);
+}
+.cf-nav-link.active:hover {
+  color: var(--cf-surface);
+  transform: none;
+}
+.cf-nav-section {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cf-muted);
+  padding: 12px 12px 6px;
+}
+
+/* ===== Responsive sidebar breakpoints ===== */
+
+/* Icon-only sidebar: medium screens where content space is at a premium */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .cf-sidebar {
+    width: 56px;
+    overflow: hidden;
+  }
+  .cf-sidebar .cf-nav-section {
+    display: none;
+  }
+  .cf-nav-link {
+    justify-content: center;
+    padding: 10px 8px;
+    gap: 0;
+  }
+  .cf-nav-link > span:not(.badge) {
+    display: none;
+  }
+  /* Brand logo — icon only */
+  .cf-sidebar > div > a {
+    justify-content: center;
+    gap: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .cf-sidebar > div > a > span {
+    display: none;
+  }
+  /* Keep notification badge visible */
+  .cf-nav-link .badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    font-size: 8px;
+    min-width: 14px;
+    height: 14px;
+    padding: 0 3px;
+  }
+  .cf-nav-link {
+    position: relative;
+  }
+}
+
+/* Mobile: hide sidebar entirely, use drawer */
+@media (max-width: 768px) {
+  .cf-sidebar {
+    display: none;
+  }
+  .cf-content {
+    padding: 1rem;
+  }
+}
+
+/* ===== Public chrome (Navbar/Footer) — theme-aware ===== */
+.cf-public-bar {
+  background: var(--cf-surface);
+  border-bottom: 1px solid var(--cf-border);
+  backdrop-filter: saturate(180%) blur(8px);
+}
+.cf-footer {
+  background: var(--cf-surface);
+  border-top: 1px solid var(--cf-border);
+}
+
+/* Public nav link */
+.cf-public-link {
+  color: var(--cf-muted);
+  font-size: 14px;
+  position: relative;
+  padding: 4px 2px;
+  transition: color 150ms ease;
+}
+.cf-public-link:hover {
+  color: var(--cf-text);
+}
+.cf-public-link.active {
+  color: var(--cf-text);
+  font-weight: 600;
+}
+.cf-public-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--cf-text);
+  border-radius: 2px;
+}
+
+/* ===== Landing-page helpers ===== */
+.cf-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--cf-text-soft);
+  padding: 5px 12px;
+  border: 1px solid var(--cf-border);
+  border-radius: 999px;
+  background: var(--cf-surface);
+  box-shadow: var(--cf-shadow-xs);
+}
+
+/* Hero background — Supreme Court building photo + deep midnight blue gradient overlay */
+.cf-hero-bg {
+  position: relative;
+  min-height: 75vh;
+  background-image: url("https://static.wixstatic.com/media/11062b_ec168939e74745a5a891e69f283f8758~mv2.jpg/v1/fill/w_1000,h_667,al_c,q_85,usm_0.66_1.00_0.01/11062b_ec168939e74745a5a891e69f283f8758~mv2.jpg");
+  background-size: cover;
+  background-position: center 65%;
+  background-color: #1a253a;
+  overflow: hidden;
+  color: #e8edf5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cf-hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(26, 37, 58, 0.72) 0%,
+    rgba(13, 22, 36, 0.58) 50%,
+    rgba(26, 37, 58, 0.72) 100%
+  );
+  pointer-events: none;
+}
+[data-theme="dark"] .cf-hero-bg::before {
+  background: linear-gradient(
+    160deg,
+    rgba(26, 37, 58, 0.82) 0%,
+    rgba(13, 22, 36, 0.7) 50%,
+    rgba(26, 37, 58, 0.82) 100%
+  );
+}
+.cf-hero-bg > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Ensure text is visible on dark hero — restore card's own theme colors */
+.cf-hero-bg .cf-muted {
+  color: rgba(232, 237, 245, 0.72);
+}
+.cf-hero-bg .cf-card {
+  color: var(--cf-text);
+}
+.cf-hero-bg .cf-card .cf-muted {
+  color: var(--cf-muted);
+}
+.cf-hero-bg .btn-outline-dark {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.9);
+}
+.cf-hero-bg .btn-outline-dark:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.8);
+  color: #fff;
+}
+
+.cf-divider {
+  height: 1px;
+  background: var(--cf-border);
+}
+
+/* Pastel stat block (used on landing) */
+.cf-stat {
+  background: var(--cf-surface);
+  border: 1px solid var(--cf-border);
+  border-radius: 12px;
+  padding: 18px 20px;
+  box-shadow: var(--cf-shadow-xs);
+  transition:
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+.cf-stat:hover {
+  box-shadow: var(--cf-shadow-md);
+  transform: translateY(-2px);
+}
+.cf-stat__value {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--cf-text);
+  line-height: 1.1;
+}
+.cf-stat__label {
+  font-size: 12px;
+  color: var(--cf-muted);
+  margin-top: 4px;
+}
+
+/* Pastel icon chip — used in FeatureCard/RoleCard. tones via data attribute */
+.cf-chip {
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 18px;
+  transition: transform 220ms ease;
+}
+.cf-card-hover:hover .cf-chip {
+  transform: scale(1.08) rotate(-3deg);
+}
+
+.cf-chip--blue {
+  background: var(--cf-pastel-blue);
+  color: var(--cf-pastel-blue-fg);
+}
+.cf-chip--purple {
+  background: var(--cf-pastel-purple);
+  color: var(--cf-pastel-purple-fg);
+}
+.cf-chip--green {
+  background: var(--cf-pastel-green);
+  color: var(--cf-pastel-green-fg);
+}
+.cf-chip--pink {
+  background: var(--cf-pastel-pink);
+  color: var(--cf-pastel-pink-fg);
+}
+.cf-chip--peach {
+  background: var(--cf-pastel-peach);
+  color: var(--cf-pastel-peach-fg);
+}
+.cf-chip--mint {
+  background: var(--cf-pastel-mint);
+  color: var(--cf-pastel-mint-fg);
+}
+.cf-chip--rose {
+  background: var(--cf-pastel-rose);
+  color: var(--cf-pastel-rose-fg);
+}
+.cf-chip--lemon {
+  background: var(--cf-pastel-lemon);
+  color: var(--cf-pastel-lemon-fg);
+}
+
+/* Theme toggle button */
+.cf-theme-toggle {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--cf-border);
+  background: var(--cf-surface);
+  color: var(--cf-text-soft);
+  transition:
+    background 150ms ease,
+    color 150ms ease,
+    transform 200ms ease;
+  cursor: pointer;
+}
+.cf-theme-toggle:hover {
+  background: var(--cf-surface-alt);
+  color: var(--cf-text);
+  transform: rotate(20deg) scale(1.05);
+}
+
+/* Auth page background */
+.cf-auth-bg {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      ellipse 50% 50% at 20% 30%,
+      var(--cf-pastel-purple) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 50% at 80% 80%,
+      var(--cf-pastel-blue) 0%,
+      transparent 60%
+    ),
+    var(--cf-bg);
+}
+
+/* Toastify minimal override */
+.Toastify__toast {
+  border-radius: 10px;
+  font-size: 14px;
+  box-shadow: var(--cf-shadow-md);
+}
+
+/* ===== Dark-mode legibility overrides =====
+   Bootstrap utility classes like .text-dark, .bg-white and .btn-light have
+   hard-coded colours that don't switch with [data-bs-theme]. These rules
+   re-bind them to our tokens so any text/icon/link/badge using those classes
+   stays readable in dark mode without touching individual pages. */
+[data-theme="dark"] .text-dark {
+  color: var(--cf-text) !important;
+}
+[data-theme="dark"] .bg-white {
+  background-color: var(--cf-surface) !important;
+  color: var(--cf-text);
+}
+[data-theme="dark"] .bg-light {
+  background-color: var(--cf-surface-alt) !important;
+  color: var(--cf-text);
+}
+[data-theme="dark"] .text-bg-light {
+  background-color: var(--cf-surface-alt) !important;
+  color: var(--cf-text) !important;
+}
+
+/* Hard-coded inline colours from earlier iterations (e.g. style={{ color: '#0f1629' }}) */
+[data-theme="dark"] [style*="color: #0f1629"],
+[data-theme="dark"] [style*="color:#0f1629"],
+[data-theme="dark"] [style*="color: #111827"],
+[data-theme="dark"] [style*="color:#111827"] {
+  color: var(--cf-text) !important;
+}
+
+/* btn-light flips so action buttons in the topbar stay readable */
+[data-theme="dark"] .btn-light {
+  --bs-btn-bg: var(--cf-surface-alt);
+  --bs-btn-color: var(--cf-text);
+  --bs-btn-border-color: var(--cf-border);
+  --bs-btn-hover-bg: var(--cf-border);
+  --bs-btn-hover-color: var(--cf-text);
+  --bs-btn-hover-border-color: var(--cf-border);
+}

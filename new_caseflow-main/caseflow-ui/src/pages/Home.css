@@ -1,0 +1,484 @@
+/* Home page — keeps only what Bootstrap cannot express:
+   scroll-reveal transitions, hero gradient/grid-pattern/blurred orbs
+   (radial-gradients + filter: blur + float animation), the custom
+   module-tab pill bar with brand hover, the architecture diagram
+   (connector lines + gradient gateway node + colored service/infra
+   tiles), Playfair Display headings, branded card hover lifts, and the
+   dark CTA with its gradient glow. Layout, spacing, grid, flex, and
+   simple text/color utilities live on Bootstrap classes in the JSX. */
+
+/* ===================================================================
+   REVEAL ANIMATION
+   =================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===================================================================
+   HERO — layered gradients, grid pattern, floating orbs
+   =================================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+
+.hero__bg { position: absolute; inset: 0; background: var(--cf-navy-950); }
+
+.hero__gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201, 168, 76, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 80% 50%, rgba(74, 144, 217, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(45, 212, 168, 0.05) 0%, transparent 50%);
+}
+
+.hero__grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 30%, transparent 70%);
+}
+
+.hero__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  animation: float 8s ease-in-out infinite;
+}
+.hero__orb--1 { width: 500px; height: 500px; top: 5%; right: 5%; background: rgba(201, 168, 76, 0.1); }
+.hero__orb--2 { width: 350px; height: 350px; bottom: 10%; left: 5%; background: rgba(45, 212, 168, 0.07); animation-delay: -4s; }
+.hero__orb--3 { width: 250px; height: 250px; top: 40%; left: 30%; background: rgba(74, 144, 217, 0.05); animation-delay: -2s; }
+
+.hero__content { position: relative; z-index: 1; padding: 160px 0 100px; }
+
+.hero__title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 6.5vw, 76px);
+  font-weight: 600;
+  line-height: 1.08;
+  color: var(--cf-white);
+  margin-bottom: 28px;
+  letter-spacing: -0.025em;
+}
+
+.hero__subtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.45);
+  max-width: 640px;
+  margin-bottom: 44px;
+  line-height: 1.75;
+}
+
+/* Glass-panel metrics strip — backdrop-filter has no Bootstrap equivalent */
+.hero__metrics {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 32px 48px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+}
+.hero__metrics--vertical {
+  flex-direction: column;
+  gap: 20px;
+  align-items: stretch;
+  padding: 28px 32px;
+}
+.hero__metric { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.hero__metric--row {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.hero__metric--row:last-child { border-bottom: none; padding-bottom: 0; }
+.hero__metric--row .hero__metric-number { font-size: 32px; }
+.hero__metric--row .hero__metric-label { text-align: right; }
+.hero__metric-number {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--cf-gold-400);
+}
+.hero__metric-label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* Scroll indicator — gradient line with pulse animation */
+.hero__scroll-indicator {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(201, 168, 76, 0.6), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+  50% { opacity: 1; transform: scaleY(1); }
+}
+
+/* ===================================================================
+   BRAND STORY — gold accent bar on highlight paragraph
+   =================================================================== */
+.brand__highlight {
+  color: var(--cf-navy-900);
+  font-weight: 600;
+  padding-left: 20px;
+  border-left: 3px solid var(--cf-gold-400);
+}
+
+/* ===================================================================
+   WHY CASEFLOW — light section + hover lift
+   =================================================================== */
+.why { background: var(--cf-gray-50); }
+
+.why-card {
+  background: var(--cf-white);
+  border: 1px solid var(--cf-gray-200);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: transparent;
+}
+
+/* ===================================================================
+   MODULES — custom pill-tab bar + active module detail panel
+   =================================================================== */
+.modules { background: var(--cf-white); }
+
+.mod-tabs { gap: 6px; padding-top: 20px; margin-bottom: 40px; }
+
+.mod-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cf-gray-500);
+  border: 1px solid var(--cf-gray-200);
+  background: var(--cf-white);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.mod-tab:hover { border-color: var(--cf-gray-400); color: var(--cf-navy-900); }
+.mod-tab--active {
+  background: var(--cf-navy-900);
+  color: var(--cf-white);
+  border-color: var(--cf-navy-900);
+}
+
+.mod-detail {
+  background: var(--cf-gray-50);
+  border: 1px solid var(--cf-gray-200);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  margin-bottom: 48px;
+  animation: fadeInUp 0.5s var(--ease-out);
+}
+
+.mod-detail__tag {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 16px;
+}
+
+.mod-detail__title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--cf-navy-900);
+  margin-bottom: 8px;
+}
+
+.mod-detail__headline {
+  font-size: 18px;
+  color: var(--cf-gray-500);
+  font-style: italic;
+  margin-bottom: 32px;
+}
+
+.mod-detail__stat {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 20px 24px;
+  background: var(--cf-white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--cf-gray-200);
+}
+.mod-detail__stat-number {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--cf-gold-500);
+}
+
+.mod-detail__features h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cf-navy-800);
+  margin-bottom: 20px;
+}
+.mod-detail__features ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-left: 0;
+}
+.mod-detail__features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cf-gray-700);
+}
+
+/* Quick-access mini cards — highlight accent shows on hover */
+.mod-mini-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 18px;
+  background: var(--cf-gray-50);
+  border: 1px solid var(--cf-gray-200);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--cf-navy-800);
+  text-align: left;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.mod-mini-card:hover {
+  background: var(--cf-white);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.mod-mini-card__title { flex: 1; }
+.mod-mini-card__arrow { color: var(--accent); opacity: 0; transition: opacity var(--duration-fast); }
+.mod-mini-card:hover .mod-mini-card__arrow { opacity: 1; }
+
+/* ===================================================================
+   ARCHITECTURE — dark section, gradient gateway node, connector line,
+   and colored service/infra tiles. Custom grid layout because the
+   diagram needs exact column behavior at each breakpoint.
+   =================================================================== */
+.arch { background: var(--cf-navy-950); overflow: hidden; }
+
+.arch__desc { color: rgba(255, 255, 255, 0.5); }
+
+.arch__feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.arch__visual { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+
+.arch__node {
+  padding: 14px 24px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.02em;
+  transition: all var(--duration-normal);
+}
+.arch__node:hover { transform: scale(1.03); }
+.arch__node span {
+  display: block;
+  margin-top: 2px;
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.5;
+}
+
+.arch__node--gateway {
+  background: linear-gradient(135deg, var(--cf-gold-500), var(--cf-gold-400));
+  color: var(--cf-navy-950);
+  width: 100%;
+  font-size: 15px;
+  box-shadow: 0 4px 24px rgba(201, 168, 76, 0.25);
+}
+
+.arch__connector { width: 2px; height: 20px; background: rgba(255, 255, 255, 0.15); }
+
+.arch__services {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+.arch__node--service {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--cf-white);
+}
+.arch__node--service:hover { background: rgba(255, 255, 255, 0.1); }
+
+.arch__infra {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+}
+.arch__node--infra {
+  background: rgba(45, 212, 168, 0.08);
+  border: 1px solid rgba(45, 212, 168, 0.2);
+  color: var(--cf-teal);
+}
+
+/* ===================================================================
+   TECH STACK — gold-underline card title + gold bullet dots
+   =================================================================== */
+.tech__card {
+  background: var(--cf-white);
+  border: 1px solid var(--cf-gray-200);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.tech__card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+.tech__card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cf-navy-900);
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--cf-gold-100);
+}
+
+.tech__list { display: flex; flex-direction: column; gap: 14px; }
+.tech__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cf-gray-700);
+}
+.tech__item-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cf-gold-400);
+  flex-shrink: 0;
+}
+
+/* ===================================================================
+   TEAM — light background + hover lift
+   =================================================================== */
+.team { background: var(--cf-gray-50); }
+
+.team-card {
+  background: var(--cf-white);
+  border: 1px solid var(--cf-gray-200);
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+.team-card__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--cf-navy-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+/* ===================================================================
+   CTA — dark rounded panel with radial-gradient glow (::before)
+   =================================================================== */
+.cta__inner {
+  background: var(--cf-navy-950);
+  border-radius: var(--radius-xl);
+  padding: 80px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.cta__inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 120%, rgba(201, 168, 76, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(45, 212, 168, 0.05) 0%, transparent 50%);
+}
+.cta__title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 600;
+  color: var(--cf-white);
+  margin-bottom: 12px;
+  position: relative;
+}
+.cta__desc {
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 36px;
+  position: relative;
+  max-width: 520px;
+}
+.cta__actions { position: relative; }
+
+/* ===================================================================
+   RESPONSIVE — layout tweaks Bootstrap utilities can't cleanly express
+   (hero metrics collapsing to column, arch grid recollapsing, etc.)
+   =================================================================== */
+@media (max-width: 768px) {
+  .hero__content { padding: 140px 0 80px; }
+  .hero__metrics { flex-direction: column; gap: 24px; padding: 24px; }
+  .mod-tabs { gap: 4px; }
+  .mod-tab__title { display: none; }
+  .mod-detail { padding: 28px; }
+  .arch__services { grid-template-columns: repeat(2, 1fr); }
+  .cta__inner { padding: 48px 24px; }
+}

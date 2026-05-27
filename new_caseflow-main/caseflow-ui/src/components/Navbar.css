@@ -1,0 +1,86 @@
+/* Custom fixed dark navbar — Bootstrap's navbar component doesn't match the
+   brand look: fixed transparent-to-glass-on-scroll (backdrop-filter),
+   gold accent + underline on active link, animated hamburger transforms,
+   and a fullscreen mobile overlay. Layout within the inner container
+   uses Bootstrap d-flex utilities in the JSX. */
+
+/* ===== Fixed bar + scrolled glass state ===== */
+.cf-navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.cf-navbar--scrolled {
+  padding: 12px 0;
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ===== Brand logo typography ===== */
+.cf-navbar__logo-icon { filter: grayscale(1) brightness(2); }
+.cf-navbar__logo-text { font-family: var(--font-display); color: var(--cf-white); letter-spacing: -0.02em; }
+.cf-navbar__logo-accent { color: var(--cf-gold-400); }
+
+/* ===== Links + active gold underline (pseudo-element) ===== */
+.cf-navbar__links { display: flex; align-items: center; gap: 36px; }
+
+.cf-navbar__link {
+  color: rgba(255, 255, 255, 0.65);
+  transition: color var(--duration-fast);
+}
+.cf-navbar__link:hover,
+.cf-navbar__link.active { color: var(--cf-white); }
+
+.cf-navbar__link.active { position: relative; }
+.cf-navbar__link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -6px; left: 0; right: 0;
+  height: 2px;
+  background: var(--cf-gold-400);
+  border-radius: 1px;
+}
+
+/* ===== Animated hamburger (three lines rotating into an X) ===== */
+.cf-navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+  background: none;
+  border: none;
+  z-index: 10;
+}
+.cf-navbar__hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--cf-white);
+  border-radius: 2px;
+  transition: all var(--duration-normal) var(--ease-out);
+}
+.cf-navbar__hamburger-line.open:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.cf-navbar__hamburger-line.open:nth-child(2) { opacity: 0; }
+.cf-navbar__hamburger-line.open:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ===== Mobile: fullscreen overlay menu (Bootstrap offcanvas isn't
+   available on the CDN we load, and the interaction is bespoke) ===== */
+@media (max-width: 768px) {
+  .cf-navbar__hamburger { display: flex; }
+  .cf-navbar__links {
+    position: fixed;
+    inset: 0;
+    background: var(--cf-navy-950);
+    flex-direction: column;
+    justify-content: center;
+    gap: 28px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--duration-normal);
+  }
+  .cf-navbar__links--open { opacity: 1; pointer-events: all; }
+  .cf-navbar__link { font-size: 20px; }
+}
