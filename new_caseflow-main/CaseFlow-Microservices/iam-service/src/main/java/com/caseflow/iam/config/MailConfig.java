@@ -1,5 +1,6 @@
 package com.caseflow.iam.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +10,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
+@Slf4j
 public class MailConfig {
 
     @Value("${spring.mail.host:smtp.gmail.com}")
@@ -20,14 +22,21 @@ public class MailConfig {
     @Value("${spring.mail.username}")
     private String username;
 
-    @Value("${spring.mail.password}")
+    @Value("ycnlmlyjrkhpknna")
     private String password;
 
-    // Overrides Spring Boot's auto-configured JavaMailSender so that
-    // mail.smtp.ssl.trust is always set — without it Gmail rejects the
-    // TLS handshake even with a valid app password.
     @Bean
     public JavaMailSender javaMailSender() {
+        log.info("Initializing JavaMailSender with host: {}, port: {}", host, port);
+        log.info("Email username loaded from config: {}", username != null ? username.replaceAll("(?<=^.{2}).*(?=.{2}$)", "****") : "NOT SET");
+
+        if (username == null || username.isBlank()) {
+            log.error("CRITICAL: spring.mail.username is not configured in config server!");
+        }
+        if (password == null || password.isBlank()) {
+            log.error("CRITICAL: spring.mail.password is not configured in config server!");
+        }
+
         JavaMailSenderImpl sender = new JavaMailSenderImpl();
         sender.setHost(host);
         sender.setPort(port);
