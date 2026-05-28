@@ -8,6 +8,8 @@
 A robust microservices architecture for case management systems, built with Spring Boot and React.
 This project provides a scalable, resilient platform for handling legal cases, appeals, hearings, workflows, compliance, notifications, and reporting.
 
+Note: This is a professional company project developed in an enterprise environment. Due to confidentiality and organizational policies, the source code and live demo cannot be shared publicly. This portfolio entry is intended to showcase my experience working on large-scale microservices-based applications and enterprise software development.
+
 ## 📋 Table of Contents
 
 - [Features](#features)
